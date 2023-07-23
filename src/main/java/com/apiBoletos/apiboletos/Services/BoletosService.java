@@ -16,6 +16,10 @@ public class BoletosService {
     public List<Boletos> list(){
         return boletosRepository.findAll();
     }
+    
+    public List<Boletos> obtenerBoletosPorEvento(Long eventoId) {
+        return boletosRepository.findByEventos_EventoId(eventoId);
+    }
 
      public void save(Boletos boletos) {
         boletosRepository.save(boletos);

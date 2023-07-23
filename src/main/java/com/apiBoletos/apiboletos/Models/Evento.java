@@ -2,6 +2,7 @@ package com.apiBoletos.apiboletos.Models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -12,72 +13,63 @@ public class Evento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventoId;
     private String nombreEvento;
-    private String tipoEvento;
-    private String lugarEvento;
+    private String descripcion;
     private Date fecha;
-    private String CantidadBoletos;
+    private String ubicacion;
 
-   
-    public Evento(String nombreEvento, String tipoEvento, String lugarEvento, Date fecha, String CantidadBoletos) {
+    public Evento(String nombreEvento, String descripcion, Date fecha, String ubicacion) {
         this.nombreEvento = nombreEvento;
-        this.tipoEvento = tipoEvento;
-        this.lugarEvento = lugarEvento;
+        this.descripcion = descripcion;
         this.fecha = fecha;
-        this.CantidadBoletos = CantidadBoletos;
+        this.ubicacion = ubicacion;
     }
 
+    @OneToMany(mappedBy = "eventos", cascade = CascadeType.ALL)
+    public List<Boletos> boletos;
+
+   
     public Evento() {
 
     }
 
-    public Long getEventoId() 
-    {
+    public Long getEventoId() {
         return eventoId;
     }
-    public void setEventoId(Long eventoId)
-    {
+
+    public void setEventoId(Long eventoId) {
         this.eventoId = eventoId;
     }
-    public String getNombreEvento()
-    {
+
+    public String getNombreEvento() {
         return nombreEvento;
     }
-    public void setNombreEvento(String nombreEvento)
-    {
+
+    public void setNombreEvento(String nombreEvento) {
         this.nombreEvento = nombreEvento;
     }
-    public String getTipoEvento()
-    {
-        return tipoEvento;
+
+    public String getDescripcion() {
+        return descripcion;
     }
-    public void setTipoEvento(String tipoEvento)
-    {
-        this.tipoEvento = tipoEvento;
+
+    public void setDescripcion() {
+        this.descripcion = descripcion;
     }
-    public String getLugarEvento()
-    {
-        return lugarEvento;
-    }
-    public void setLugarEvento(String lugarEvento)
-    {
-        this.lugarEvento = lugarEvento;
-    }
-    public Date Fecha()
-    {
+
+    public Date getFecha() {
         return fecha;
     }
-    public void setFecha(Date fecha)
-    {
+
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public String getCantidadBoletos()
-    {
-        return CantidadBoletos;
+
+    public String getUbicacion() {
+        return ubicacion;
     }
-    public void setCantidadBoletos(String cantidadBoletos)
-    {
-        this.CantidadBoletos = cantidadBoletos;
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
-    private static final long serialVersionUID = 1L;
 
 }

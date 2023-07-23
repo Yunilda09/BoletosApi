@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apiBoletos.apiboletos.Models.Usuario;
 import com.apiBoletos.apiboletos.Services.UsuarioService;
 
+
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class UsuarioController {
     @Autowired
@@ -42,10 +45,10 @@ public class UsuarioController {
         usuarioService.save(usuario);
     }
 
-    @PutMapping("/update/usuario{id}")
+    @PutMapping("/usuario/update/{id}")
     public ResponseEntity<Usuario> update(@RequestBody Usuario usuario, @PathVariable Long id) {
         try {
-            Usuario usuarioExiste = usuarioService.findById(id);
+            Usuario usuarioExistente = usuarioService.findById(id);
             usuarioService.save(usuario);
             return new ResponseEntity<Usuario>(HttpStatus.OK);
 

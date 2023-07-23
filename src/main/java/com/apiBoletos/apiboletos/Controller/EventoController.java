@@ -5,18 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apiBoletos.apiboletos.Models.Evento;
 import com.apiBoletos.apiboletos.Services.EventoService;
 
+
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping(path = "eventos")
 public class EventoController {
     @Autowired
     EventoService eventoService;
@@ -42,10 +47,9 @@ public class EventoController {
         eventoService.save(evento);
     }
 
-    @PutMapping("/update/evento{id}")
+    @PutMapping("/evento/update/{id}")
     public ResponseEntity<Evento> update(@RequestBody Evento evento, @PathVariable Long id) {
         try {
-            Evento eventoExiste = eventoService.findById(id);
             eventoService.save(evento);
             return new ResponseEntity<Evento>(HttpStatus.OK);
 
